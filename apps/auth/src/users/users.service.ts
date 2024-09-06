@@ -27,8 +27,10 @@ export class UsersService {
     try {
       await this.usersRepository.findOne({ email: createUserDto.email });
     } catch (error) {
-      throw new UnprocessableEntityException('Email already exists!');
+      return;
     }
+
+    throw new UnprocessableEntityException('Email already exists!');
   }
 
   async validateUser(email: string, password: string) {
